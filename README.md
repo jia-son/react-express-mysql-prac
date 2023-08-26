@@ -70,6 +70,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
 
 ### React, Node.js, MySQL 연동해보기
-서버단은 node, 프론트는 reqact, DB는 MySQL을 사용하는 연습하기
-목표는 기본적인 CRUD를 동작할 수 있도록 하는 것
+서버단은 node, 프론트는 reqact, DB는 MySQL을 사용하는 연습하기  
+목표는 기본적인 CRUD를 동작할 수 있도록 하는 것  
 프론트의 꾸밈에는 크게 신경쓰지 않고 진행할 예정

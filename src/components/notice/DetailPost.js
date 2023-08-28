@@ -3,6 +3,7 @@ import '../main/Main.js';
 import axios from 'axios';
 
 import { useNavigate, useParams } from "react-router-dom";
+import { async } from "q";
 
 function DetailPost() {
 
@@ -36,6 +37,11 @@ function DetailPost() {
         navigate(`/updatePost/${postId}`, { state: data });
     };
 
+    const handleDeleteClick = async() => {
+        await axios.delete(`/post/${postId}`);
+        navigate('/notice');
+    };
+
     return (
         <>
             <div className="mainBox">
@@ -62,6 +68,7 @@ function DetailPost() {
                 <div>
                     <button onClick={() => navigate('/notice')}>목록</button>
                     <button onClick={handleEditClick}>수정</button>
+                    <button onClick={handleDeleteClick}>삭제</button>
                 </div>
             </div>
         </>

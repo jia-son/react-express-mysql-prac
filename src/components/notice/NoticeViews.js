@@ -38,8 +38,8 @@ function NoticeViews() {
                     {data.map((item, index) => (
                         <div key={item.id} className="post-item">
                             <div className="item-left">
-                                <span>{index + 1}. </span>
-                                <span>{item.title}</span>
+                                {/* <span>{item.title}</span> */}
+                                <p onClick={() => navigate(`/detailPost/${item.id}`)}>{index + 1}. {item.title}</p>
                             </div>
                             <span className="date">{formatDate(item.createdAt)}</span>
                         </div>

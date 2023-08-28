@@ -9,3 +9,6 @@ Content-Type: application/json
 
 ###
 get http://localhost:8080/post
+
+###
+get http://localhost:8080/post/1

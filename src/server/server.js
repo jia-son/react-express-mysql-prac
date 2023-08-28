@@ -46,3 +46,26 @@ app.get('/post', (req, res) => {
         }
     });
 });
+
+app.get('/post/:postId', (req, res) => {
+    console.log('글 상세 조회');
+    const postId = req.params.postId;
+    const sql = 'select * from notice_table where id = ?';
+    
+
+    db.query(sql, postId, (err, data) => {
+        if (err) {
+            console.log('err', err);
+            return;
+        } else if(data.length === 0) {
+            return res.status(400).send('존재하지 않는 게시글입니다.');
+        } else {
+            const postInfo = {
+                "title": data[0].title,
+                "content": data[0].content,
+                "createdAt": data[0].createdAt
+            };
+            res.send(postInfo);
+        }
+    });
+});

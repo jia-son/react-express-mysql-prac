@@ -108,3 +108,18 @@ app.put('/post/:postId', (req, res) => {
 
     
 });
+
+app.delete('/post/:postId', (req, res) => {
+    console.log('게시글 삭제');
+    const postId = req.params.postId;
+    const sql = 'delete from notice_table where id = ?';
+
+    db.query(sql, postId, (err, data) => {
+        if(err) {
+            console.log('err', err);
+            return;
+        } else {
+            res.send('삭제 완료');
+        }
+    });
+});

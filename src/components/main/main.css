@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column; /* 변경: 세로 방향으로 정렬 */
   align-items: flex-start; /* 변경: 왼쪽 정렬 */
-  margin-top: 15px;
+  margin-top: 10px;
 
   @media (min-width: 768px) { /* 화면 너비 768px 이상일 때 */
       flex-direction: row; /* 가로 방향으로 정렬 */

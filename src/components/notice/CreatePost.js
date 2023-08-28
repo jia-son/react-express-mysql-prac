@@ -20,7 +20,7 @@ function CreatePost() {
         e.preventDefault();
 
         try {
-            const res = await axios.post('/createPost', postInfo);
+            const res = await axios.post('/post', postInfo);
             console.log('글 작성 res', res);
 
             navigate('/notice');

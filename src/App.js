@@ -1,18 +1,18 @@
 import './App.css';
-import axios from 'axios';
+import { Route, Routes } from "react-router-dom";
+import NoticeViews from './components/notice/NoticeViews';
+import CreatePost from './components/notice/CreatePost';
+import MainPage from './components/main/Main.js';
 
 function App() {
-
-  const selectAll = async() => {
-    const res = await axios.get('/get');
-    console.log(res.data);
-  };
-
   return (
-    <div className="App">
-      <h1>React-express-MySQl 연동 확인</h1>
-      <button onClick={selectAll}>전체 목록 조회</button>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<MainPage />} />
+        <Route path='/notice' element={<NoticeViews />} />
+        <Route path='/createPost' element={<CreatePost />} />
+      </Routes>
+    </>
   );
 }
 

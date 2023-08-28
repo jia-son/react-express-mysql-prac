@@ -1,0 +1,8 @@
+###
+post http://localhost:8080/createPost
+Content-Type: application/json
+
+{
+    "title": "타이틀",
+    "content": "내용"
+}

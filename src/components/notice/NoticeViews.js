@@ -12,8 +12,6 @@ function NoticeViews() {
     useEffect(() => {
         async function fetchData() {
             const response = await axios.get('/post');
-            console.log('글 불러오기', response.data);
-
             setData(response.data);
         }
     
@@ -38,7 +36,6 @@ function NoticeViews() {
                     {data.map((item, index) => (
                         <div key={item.id} className="post-item">
                             <div className="item-left">
-                                {/* <span>{item.title}</span> */}
                                 <p onClick={() => navigate(`/detailPost/${item.id}`)}>{index + 1}. {item.title}</p>
                             </div>
                             <span className="date">{formatDate(item.createdAt)}</span>

@@ -12,3 +12,12 @@ get http://localhost:8080/post
 
 ###
 get http://localhost:8080/post/1
+
+###
+put http://localhost:8080/post/1
+Content-Type: application/json
+
+{
+    "title": "타이틀",
+    "content": "내용"
+}

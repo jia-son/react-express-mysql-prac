@@ -32,6 +32,10 @@ function DetailPost() {
         fetchData();
     }, [postId]);
 
+    const handleEditClick = () => {
+        navigate(`/updatePost/${postId}`, { state: data });
+    };
+
     return (
         <>
             <div className="mainBox">
@@ -57,6 +61,7 @@ function DetailPost() {
 
                 <div>
                     <button onClick={() => navigate('/notice')}>목록</button>
+                    <button onClick={handleEditClick}>수정</button>
                 </div>
             </div>
         </>

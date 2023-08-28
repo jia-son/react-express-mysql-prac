@@ -21,9 +21,9 @@ function CreatePost() {
 
         try {
             const res = await axios.post('/post', postInfo);
-            console.log('글 작성 res', res);
+            const postId = res.data;
 
-            navigate('/notice');
+            navigate(`/detailPost/${postId}`);
         } catch(error) {
             const err = error.response;
 

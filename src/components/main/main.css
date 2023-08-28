@@ -1,25 +1,6 @@
-/* .mainBox {
-  width: 1200px;
-  height: 700px;
-  background-color: beige;
-  margin: 0 auto;
-}
-
-.post-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-
-  last-child {
-    text-align: right;
-    margin-right: 500px;
-  }
-} */
-
 .mainBox {
   width: 100%; /* 변경: 화면 너비에 맞게 조정 */
   max-width: 1200px;
-  height: 700px;
   background-color: beige;
   margin: 0 auto;
 }

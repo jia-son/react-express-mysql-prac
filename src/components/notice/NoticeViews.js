@@ -30,6 +30,7 @@ function NoticeViews() {
             <div className="mainBox">
                 <h1>목록이지렁</h1>
                 <button onClick={() => navigate('/')}>메인</button>
+                <button onClick={() => navigate('/map')}>지도</button>
                 <button onClick={() => navigate('/createPost')}>글쓰기</button>
 
                 <div>

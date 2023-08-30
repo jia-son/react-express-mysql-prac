@@ -12,6 +12,7 @@ function Main() {
         <div className="mainBox">
             <h1>메인이지렁</h1>
             <button onClick={() => navigate('/notice')}>게시글 목록</button>
+            <button onClick={() => navigate('/map')}>지도 연습</button>
         </div>
         </>
     )

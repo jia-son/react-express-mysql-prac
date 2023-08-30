@@ -1,14 +1,12 @@
-/*global kakao */
-
-import React , { useEffect , useRef }  from "react";
+import React , { useEffect , useRef, useState }  from "react";
 import { useNavigate } from "react-router-dom";
-import '../main/Main.js';
+import '../main/main.css';
 
 import axios from 'axios';
 
 const { kakao } = window;
 
-function Map() {
+const Map = () => {
     const navigate = useNavigate();
 
     const container = useRef(null);

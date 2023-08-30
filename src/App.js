@@ -5,6 +5,7 @@ import NoticeViews from './components/notice/NoticeViews';
 import CreatePost from './components/notice/CreatePost';
 import DetailPost from './components/notice/DetailPost';
 import UpdatePost from './components/notice/UpdatePost';
+import MapPage from './components/map/Map';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path='/createPost' element={<CreatePost />} />
         <Route path='/detailPost/:postId' element={<DetailPost />} />
         <Route path='/updatePost/:postId' element={<UpdatePost />} />
+
+        <Route path='/map' element={<MapPage />} />
       </Routes>
     </>
   );

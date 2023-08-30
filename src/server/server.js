@@ -1,12 +1,26 @@
+// const path = require('path');
+// const dotenvPath = path.resolve(__dirname, '../../key.env'); // .env 파일의 절대 경로
+
+// require('dotenv').config({ path: dotenvPath });
+// console.log('Loaded environment variables:', process.env);
+
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 const db = require('./config/db.js');
 
 app.listen(8080, () => {
     console.log('Server on : http://localhost:8080');
 });
+
+// const KAKAO_MAPS_API_KEY = process.env.KAKAO_MAPS_API_KEY;
+// app.get('/getKakaoKey', (req, res) => {
+//     res.send({ apiKey : KAKAO_MAPS_API_KEY });
+// });
 
 app.post('/post', (req, res) => {
     console.log('글 작성');

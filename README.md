@@ -77,3 +77,56 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ---
 
 - .env파일에는 파일명을 붙이면 안 된다.
+
+<details>
+<summary>발생한 문제1. DetailPost.js에서 정적지도가 안 뜸</summary>
+<p>
+
+<h4>현재 상황</h4>
+createPost페이지에서 사용자로부터 제목, 내용, 장소를 입력받으면 DB에 제목, 내용과 장소의 X.Y좌표를 저장.  
+DetailPost페이지에서 해당 내용을 전부 불러와 data에 저장.  
+data에 잘 저장된 것을 확인했으나, staticMapContainer의 생성 전(null값일 때)에 변수를 참조하려 해서 Cannot read properties of undefined (reading 'defaultView')에러 발생.
+
+- useEffect에서 data가 변경되었을 때 실행될 수 있도록 수정
+
+---
+
+<h4>또 다른 문제 사항 : 지도가 온전히 출력되었다가도 새로고침 등을 할 경우 렌더링 멈춤 현상</h4>
+
+- 데이터를 비동기적으로 불러오는 동안 지도 렌더링을 계속 시도하게끔 코드가 짜여져 있었음.  
+데이터가 전부 로드된 다음 지도를 생성할 수 있도록 data를 가져오는 useEffect에서 setData다음으로 setIdLoading(false)코드 추가.  
+이후, 지도를 가져오는 useEffect에 isLoading의 상태값도 함께 확인하도록 코드를 추가했더니 해결되었다.
+
+---
+
+<h4>정적 지도 컴포넌트 분리 후 문제 발생 및 해결</h4>
+
+컴포넌트를 넣는 위치의 문제였음.
+
+```
+<div>
+{isLoading ? (
+    <p>Loading...</p>
+ ) : (
+    <>
+        {blankNotice ? (
+             <h2>{blankNotice}</h2>
+        ) : (
+            <>
+                <h3>{data.title}</h3>
+                <p>{data.content}</p>
+                <div>
+                    <StaticMaps placeX={data.placeX} placeY={data.placeY}/>
+                </div>
+            </>
+        )}
+    </>
+)}
+</div>
+```
+
+- StaticMaps를 isLoading 조건부 확인하는 곳의 바깥에 위치시켰기 때문에 렌더링 순서가 꼬였었다.  
+위치를 올바른 곳으로 옮겨주었더니 해결되었다.
+
+</p>
+</details>

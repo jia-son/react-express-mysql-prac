@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import '../main/Main.js';
 import axios from 'axios';
 
 import { useNavigate, useParams } from "react-router-dom";
-import { async } from "q";
+import StaticMaps from "../map/StaticMap.js";
 
 function DetailPost() {
 
@@ -13,12 +13,13 @@ function DetailPost() {
     const [isLoading, setIsLoading] = useState(true);
     const [blankNotice, setBlankNotice] = useState();
     const { postId } = useParams();
-
+    
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get(`/post/${postId}`);
                 setData(response.data);
+                // setIsLoading(false);
             } catch (error) {
                 console.log('error', error);
                 const err = error.response;
@@ -47,7 +48,6 @@ function DetailPost() {
             <div className="mainBox">
                 <h1>디테일 페이지지렁이</h1>
 
-
                 <div>
                     {isLoading ? (
                         <p>Loading...</p>
@@ -59,6 +59,9 @@ function DetailPost() {
                                 <>
                                     <h3>{data.title}</h3>
                                     <p>{data.content}</p>
+                                    <div>
+                                        <StaticMaps placeX={data.placeX} placeY={data.placeY}/>
+                                    </div>
                                 </>
                             )}
                         </>

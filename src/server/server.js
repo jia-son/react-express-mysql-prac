@@ -85,6 +85,7 @@ app.get('/post/:postId', (req, res) => {
                 "placeY": data[0].placeY,
                 "placeX": data[0].placeX
             };
+            console.log('응...?', postInfo);
             res.send(postInfo);
         }
     });

@@ -3,9 +3,7 @@ import '../main/Main.js';
 import axios from 'axios';
 
 import { useNavigate, useParams } from "react-router-dom";
-import { async } from "q";
-
-const { kakao } = window;
+import StaticMaps from "../map/StaticMap.js";
 
 function DetailPost() {
 
@@ -15,24 +13,13 @@ function DetailPost() {
     const [isLoading, setIsLoading] = useState(true);
     const [blankNotice, setBlankNotice] = useState();
     const { postId } = useParams();
-    const [map, setMap] = useState(null);
-    
-    const staticMapContainer = useRef(null);
-    // const markerPosition = new kakao.maps.LatLng(data.placeY, data.placeX);
-    // const marker = {
-    //     position : markerPosition
-    // };
-    // const staticMapOption = {
-    //     center: new kakao.maps.LatLng(data.placeY, data.placeX),
-    //     level: 3,
-    //     marker: marker
-    // }
     
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get(`/post/${postId}`);
                 setData(response.data);
+                // setIsLoading(false);
             } catch (error) {
                 console.log('error', error);
                 const err = error.response;
@@ -45,8 +32,6 @@ function DetailPost() {
             }
         }
         fetchData();
-        // const staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-        // setMap(staticMap);
     }, [postId]);
 
     const handleEditClick = () => {
@@ -63,7 +48,6 @@ function DetailPost() {
             <div className="mainBox">
                 <h1>디테일 페이지지렁이</h1>
 
-
                 <div>
                     {isLoading ? (
                         <p>Loading...</p>
@@ -75,20 +59,14 @@ function DetailPost() {
                                 <>
                                     <h3>{data.title}</h3>
                                     <p>{data.content}</p>
+                                    <div>
+                                        <StaticMaps placeX={data.placeX} placeY={data.placeY}/>
+                                    </div>
                                 </>
                             )}
                         </>
                     )}
                 </div>
-                {/* <div>
-                    {map ? (
-                        <div
-                        id="map"
-                        ref={staticMapContainer}
-                        style={{ width: '100%', height: '350px', display: 'block' }}
-                    ></div>
-                    ) : null}
-                </div> */}
 
                 <div>
                     <button onClick={() => navigate('/notice')}>목록</button>

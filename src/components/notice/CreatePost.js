@@ -44,7 +44,7 @@ function CreatePost() {
     const mapContainer = useRef(null);
     const mapOptions = {
         center : new kakao.maps.LatLng(33.450701, 126.570667),
-        level : 3
+        level : 2
     };
 
     const infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -98,7 +98,7 @@ function CreatePost() {
             <div className="mainBox">
                 <h1>글쓰기 페이지</h1>
                 <button onClick={() => navigate('/notice')}>게시글 목록</button>
-                
+
                 <div>
                     <form onSubmit={onSubmitMapHandler}>
                         <input type="text" name="search" placeholder="search" onChange={onChangeMapHandler}/>

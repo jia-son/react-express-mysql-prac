@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import '../main/Main.js';
 import axios from 'axios';
 
 import { useNavigate, useParams } from "react-router-dom";
 import { async } from "q";
+
+const { kakao } = window;
 
 function DetailPost() {
 
@@ -13,7 +15,19 @@ function DetailPost() {
     const [isLoading, setIsLoading] = useState(true);
     const [blankNotice, setBlankNotice] = useState();
     const { postId } = useParams();
-
+    const [map, setMap] = useState(null);
+    
+    const staticMapContainer = useRef(null);
+    // const markerPosition = new kakao.maps.LatLng(data.placeY, data.placeX);
+    // const marker = {
+    //     position : markerPosition
+    // };
+    // const staticMapOption = {
+    //     center: new kakao.maps.LatLng(data.placeY, data.placeX),
+    //     level: 3,
+    //     marker: marker
+    // }
+    
     useEffect(() => {
         async function fetchData() {
             try {
@@ -31,6 +45,8 @@ function DetailPost() {
             }
         }
         fetchData();
+        // const staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+        // setMap(staticMap);
     }, [postId]);
 
     const handleEditClick = () => {
@@ -64,6 +80,15 @@ function DetailPost() {
                         </>
                     )}
                 </div>
+                {/* <div>
+                    {map ? (
+                        <div
+                        id="map"
+                        ref={staticMapContainer}
+                        style={{ width: '100%', height: '350px', display: 'block' }}
+                    ></div>
+                    ) : null}
+                </div> */}
 
                 <div>
                     <button onClick={() => navigate('/notice')}>목록</button>

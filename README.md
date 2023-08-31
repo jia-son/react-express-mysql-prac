@@ -77,3 +77,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ---
 
 - .env파일에는 파일명을 붙이면 안 된다.
+
+<details>
+<summary>발생한 문제1. DetailPost.js에서 정적지도가 안 뜸</summary>
+<p>
+
+<h4>현재 상황</h4>
+createPost페이지에서 사용자로부터 제목, 내용, 장소를 입력받으면 DB에 제목, 내용과 장소의 X.Y좌표를 저장.  
+DetailPost페이지에서 해당 내용을 전부 불러와 data에 저장.  
+data에 잘 저장된 것을 확인했으나, staticMapContainer의 생성 전(null값일 때)에 변수를 참조하려 해서 Cannot read properties of undefined (reading 'defaultView')에러 발생.
+
+</p>
+</details>

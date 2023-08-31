@@ -24,9 +24,11 @@ app.listen(8080, () => {
 
 app.post('/post', (req, res) => {
     console.log('글 작성');
-    const { title, content } = req.body;
+    const { title, content, placeY, placeX } = req.body;
     console.log(`title : ${title}`);
     console.log(`content : ${content}`);
+    console.log(`placeY : ${placeY}`);
+    console.log(`placeX : ${placeX}`);
 
     if(title === '') {
         return res.status(400).send('제목이 누락될 수 없습니다.');
@@ -34,8 +36,8 @@ app.post('/post', (req, res) => {
         return res.status(400).send('내용이 누락될 수 없습니다.');
     }
 
-    const sql = 'insert into notice_table(title, content) values(?, ?)';
-    db.query(sql, [title, content], (err, data) => {
+    const sql = 'insert into notice_table(title, content, placeY, placeX) values(?, ?, ?, ?)';
+    db.query(sql, [title, content, placeY, placeX], (err, data) => {
         if(err) {
             console.log('err', err);
             return;
@@ -79,7 +81,9 @@ app.get('/post/:postId', (req, res) => {
             const postInfo = {
                 "title": data[0].title,
                 "content": data[0].content,
-                "createdAt": data[0].createdAt
+                "createdAt": data[0].createdAt,
+                "placeY": data[0].placeY,
+                "placeX": data[0].placeX
             };
             res.send(postInfo);
         }

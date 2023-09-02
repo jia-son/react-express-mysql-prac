@@ -17,18 +17,14 @@ app.listen(8080, () => {
     console.log('Server on : http://localhost:8080');
 });
 
-// const KAKAO_MAPS_API_KEY = process.env.KAKAO_MAPS_API_KEY;
-// app.get('/getKakaoKey', (req, res) => {
-//     res.send({ apiKey : KAKAO_MAPS_API_KEY });
-// });
-
 app.post('/post', (req, res) => {
     console.log('글 작성');
-    const { title, content, placeY, placeX } = req.body;
+    const { title, content, placeY, placeX, postDate } = req.body;
     console.log(`title : ${title}`);
     console.log(`content : ${content}`);
     console.log(`placeY : ${placeY}`);
     console.log(`placeX : ${placeX}`);
+    console.log(`postDate : ${postDate}`);
 
     if(title === '') {
         return res.status(400).send('제목이 누락될 수 없습니다.');
@@ -36,8 +32,8 @@ app.post('/post', (req, res) => {
         return res.status(400).send('내용이 누락될 수 없습니다.');
     }
 
-    const sql = 'insert into notice_table(title, content, placeY, placeX) values(?, ?, ?, ?)';
-    db.query(sql, [title, content, placeY, placeX], (err, data) => {
+    const sql = 'insert into notice_table(title, content, placeY, placeX, postDate) values(?, ?, ?, ?, ?)';
+    db.query(sql, [title, content, placeY, placeX, postDate], (err, data) => {
         if(err) {
             console.log('err', err);
             return;
@@ -83,7 +79,8 @@ app.get('/post/:postId', (req, res) => {
                 "content": data[0].content,
                 "createdAt": data[0].createdAt,
                 "placeY": data[0].placeY,
-                "placeX": data[0].placeX
+                "placeX": data[0].placeX,
+                "postDate": data[0].postDate
             };
             console.log('응...?', postInfo);
             res.send(postInfo);

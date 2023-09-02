@@ -13,6 +13,10 @@ function DetailPost() {
     const [isLoading, setIsLoading] = useState(true);
     const [blankNotice, setBlankNotice] = useState();
     const { postId } = useParams();
+
+    const date = data.postDate;
+    const newDate = date.split('T')[0];
+    console.log('ㅇㅁㅅㄷ', newDate);
     
     useEffect(() => {
         async function fetchData() {
@@ -57,6 +61,7 @@ function DetailPost() {
                                 <h2>{blankNotice}</h2>
                             ) : (
                                 <>
+                                    <h4>{newDate}</h4>
                                     <h3>{data.title}</h3>
                                     <p>{data.content}</p>
                                     <div>

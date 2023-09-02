@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import '../main/Main.js';
+import '../main/main.css';
 
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import dayjs from "dayjs";
 
 const { kakao } = window;
 
@@ -10,12 +15,14 @@ function CreatePost() {
     const navigate = useNavigate();
     const [searchInfo, setSearchInfo] = useState();
     const [map, setMap] = useState(null);
+    const [startDate, setStartDate] = useState(new Date());
 
     const [postInfo, setPostInfo] = useState({
         title: "",
         content: "",
         placeY: 0,
-        placeX: 0
+        placeX: 0,
+        postDate: ""
     });
 
     const onChangeHandler = (e) => {
@@ -26,6 +33,11 @@ function CreatePost() {
         e.preventDefault();
 
         try {
+            let date = startDate;
+            date.setHours(date.getHours() + 9);
+            const dateParts = date.toISOString().split('T')[0];
+            setPostInfo((info) => ({ ...info, postDate: dateParts}));
+
             const res = await axios.post('/post', postInfo);
             const postId = res.data;
 
@@ -120,6 +132,11 @@ function CreatePost() {
                                 name="title"
                                 placeholder="title"
                                 onChange={onChangeHandler}
+                            />
+                            <DatePicker
+                                showIcon
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
                             />
                             <hr />
                             <textarea

@@ -13,17 +13,23 @@ function DetailPost() {
     const [isLoading, setIsLoading] = useState(true);
     const [blankNotice, setBlankNotice] = useState();
     const { postId } = useParams();
-
-    const date = data.postDate;
-    const newDate = date.split('T')[0];
-    console.log('ㅇㅁㅅㄷ', newDate);
+    const [date, setDate] = useState([
+        {
+            "year": "",
+            "month": "",
+            "day": ""
+        }
+    ]);
     
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get(`/post/${postId}`);
                 setData(response.data);
-                // setIsLoading(false);
+
+                const createDate = response.data.postDate;
+                const newDate = createDate.split('T')[0].split('-');
+                setDate({year: newDate[0], month: newDate[1], day:newDate[2]});
             } catch (error) {
                 console.log('error', error);
                 const err = error.response;
@@ -61,7 +67,7 @@ function DetailPost() {
                                 <h2>{blankNotice}</h2>
                             ) : (
                                 <>
-                                    <h4>{newDate}</h4>
+                                    <h4>{date.year}년 {date.month}월 {date.day}일</h4>
                                     <h3>{data.title}</h3>
                                     <p>{data.content}</p>
                                     <div>

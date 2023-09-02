@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import dayjs from "dayjs";
+
 const { kakao } = window;
 
 function CreatePost() {
@@ -32,7 +34,7 @@ function CreatePost() {
 
         try {
             let date = startDate;
-                date.setHours(date.getHours() + 9);
+            date.setHours(date.getHours() + 9);
             const dateParts = date.toISOString().split('T')[0];
             setPostInfo((info) => ({ ...info, postDate: dateParts}));
 

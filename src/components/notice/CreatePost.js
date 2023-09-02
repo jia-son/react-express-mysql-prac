@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import '../main/Main.js';
+import '../main/main.css';
 
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import { useNavigate } from "react-router-dom";
+
 const ClaendarPost = (date) => {
+    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -39,7 +42,7 @@ const ClaendarPost = (date) => {
                     data.map((item, index) => (
                         <div key={item.id} className="post-item">
                             <div className="item-left">
-                                <p>{index + 1}. {item.title}</p>
+                                <p onClick={() => navigate(`/detailPost/${item.id}`)}>{index + 1}. {item.title}</p>
                             </div>
                         </div>
                     ))

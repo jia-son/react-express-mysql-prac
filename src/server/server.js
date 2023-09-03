@@ -153,13 +153,14 @@ app.delete('/post/:postId', (req, res) => {
 app.get('/calendar/:ymd', (req, res) => {
     console.log('일자별 게시글 출력');
     const ymd = req.params.ymd;
-    const sql = 'select title, postDate from notice_table where postDate = ?'
+    const sql = 'select * from notice_table where postDate = ?'
 
     db.query(sql, ymd, (err, data) => {
         if(err) {
             console.log('err', err);
             return;
         } else {
+            console.log('일자별 게시글:', data);
             res.send(data);
         }
     });

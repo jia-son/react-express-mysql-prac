@@ -7,6 +7,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
 import { format } from 'date-fns';
 
+import ClaendarPost from './CalendarPost.js';
+
 const CalendarPrac = () => {
     const navigate = useNavigate();
     const [value, onChange] = useState(new Date());
@@ -19,8 +21,6 @@ const CalendarPrac = () => {
 
     useEffect(() => {
         setDateValue(dateParts);
-        console.log('value 확인:', value);
-        console.log('dateValue 확인:', dateValue);
     }, [value, dateValue]);
     
     return (
@@ -39,6 +39,10 @@ const CalendarPrac = () => {
                     calendarType="gregory"
                     value={value}
                 />
+            </div>
+
+            <div>
+                <ClaendarPost props={dateValue}/>
             </div>
         </div>
         </>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 const { kakao } = window;
 
@@ -22,8 +22,12 @@ function CreatePost() {
         content: "",
         placeY: 0,
         placeX: 0,
-        postDate: ""
+        postDate: new Date(startDate)
     });
+
+    useEffect(() => {
+        setPostInfo((prevState) => ({ ...prevState, postDate: startDate }));
+    }, [startDate]);
 
     const onChangeHandler = (e) => {
         setPostInfo((info) => ({ ...info, [e.target.name]: e.target.value }));
@@ -33,11 +37,6 @@ function CreatePost() {
         e.preventDefault();
 
         try {
-            let date = startDate;
-            date.setHours(date.getHours() + 9);
-            const dateParts = date.toISOString().split('T')[0];
-            setPostInfo((info) => ({ ...info, postDate: dateParts}));
-
             const res = await axios.post('/post', postInfo);
             const postId = res.data;
 

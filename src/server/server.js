@@ -32,8 +32,11 @@ app.post('/post', (req, res) => {
         return res.status(400).send('내용이 누락될 수 없습니다.');
     }
 
+    const postDateObj = new Date(postDate);
+    const formattedDate = postDateObj.toISOString().split('T')[0];
+
     const sql = 'insert into notice_table(title, content, placeY, placeX, postDate) values(?, ?, ?, ?, ?)';
-    db.query(sql, [title, content, placeY, placeX, postDate], (err, data) => {
+    db.query(sql, [title, content, placeY, placeX, formattedDate], (err, data) => {
         if(err) {
             console.log('err', err);
             return;
@@ -74,15 +77,19 @@ app.get('/post/:postId', (req, res) => {
         } else if(data.length === 0) {
             return res.status(404).send('존재하지 않는 게시글입니다.');
         } else {
+            const postDateObj = new Date(data[0].postDate);
+            postDateObj.setHours(postDateObj.getHours() + 9);
+            const isoDate = postDateObj.toISOString();
+            const dateParts = isoDate.split('T')[0];
+
             const postInfo = {
                 "title": data[0].title,
                 "content": data[0].content,
                 "createdAt": data[0].createdAt,
                 "placeY": data[0].placeY,
                 "placeX": data[0].placeX,
-                "postDate": data[0].postDate
+                "postDate": dateParts
             };
-            console.log('응...?', postInfo);
             res.send(postInfo);
         }
     });
@@ -91,9 +98,12 @@ app.get('/post/:postId', (req, res) => {
 app.put('/post/:postId', (req, res) => {
     console.log('글 수정');
     const postId = req.params.postId;
-    const { title, content } = req.body;
+    const { title, content, postDate } = req.body;
     const selectSql = 'select * from notice_table where id = ?';
-    const sql = 'update notice_table set title = ?, content = ? where id = ?';
+    const sql = 'update notice_table set title = ?, content = ?, postDate = ? where id = ?';
+
+    const postDateObj = new Date(postDate);
+    const formattedDate = postDateObj.toISOString().split('T')[0];
 
     if(title === '') {
         return res.status(400).send('제목이 누락될 수 없습니다.');
@@ -109,7 +119,7 @@ app.put('/post/:postId', (req, res) => {
             return res.status(404).send('존재하지 않는 게시글입니다.');
         } else {
 
-            db.query(sql, [title, content, postId], (error, payload) => {
+            db.query(sql, [title, content, formattedDate, postId], (error, payload) => {
                 if (error) {
                     console.log('error', error);
                     return;

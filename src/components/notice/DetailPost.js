@@ -81,6 +81,7 @@ function DetailPost() {
 
                 <div>
                     <button onClick={() => navigate('/notice')}>목록</button>
+                    <button onClick={() => navigate('/calendarPrac')}>캘린더</button>
                     <button onClick={handleEditClick}>수정</button>
                     <button onClick={handleDeleteClick}>삭제</button>
                 </div>

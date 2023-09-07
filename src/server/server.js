@@ -5,7 +5,7 @@
 // console.log('Loaded environment variables:', process.env);
 
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); 
 const app = express();
 
 app.use(express.json());
